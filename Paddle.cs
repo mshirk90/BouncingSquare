@@ -94,12 +94,13 @@ namespace BouncingSquare
             _box = new PictureBox();
             _form = frm;
             _rnd = rnd;
-            Size size = new Size(500, 5);
+            Size size = new Size(500, 35);
+            _box.Size = size;
             int x = (_form.Width / 2) - (_box.Width);
             int y = (_form.Height) - (_box.Height);
             Point location = new Point(x, y);
             _box.Location = location;
-            _box.BackColor = Color.Lime;
+            _box.BackColor = Color.Red;
             _form.Controls.Add(_box);
 
         }

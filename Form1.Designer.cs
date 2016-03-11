@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblScore = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lblScore
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.Fuchsia;
-            this.label1.Location = new System.Drawing.Point(13, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(10, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "-";
+            this.lblScore.AutoSize = true;
+            this.lblScore.BackColor = System.Drawing.Color.Transparent;
+            this.lblScore.Font = new System.Drawing.Font("Chiller", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.ForeColor = System.Drawing.Color.Red;
+            this.lblScore.Location = new System.Drawing.Point(12, 9);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(37, 43);
+            this.lblScore.TabIndex = 0;
+            this.lblScore.Text = "0";
             // 
             // formBouncingSquare
             // 
@@ -49,7 +50,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(519, 354);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblScore);
             this.ForeColor = System.Drawing.Color.Lime;
             this.KeyPreview = true;
             this.Name = "formBouncingSquare";
@@ -67,7 +68,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblScore;
     }
 }
 

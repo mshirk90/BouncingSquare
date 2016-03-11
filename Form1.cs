@@ -50,13 +50,13 @@ namespace BouncingSquare
             else if (e.KeyData == Keys.N)
             {
                 iCount++;
-                Square square = new Square(this, rnd, paddle);          
-                label1.Text = iCount.ToString() + " Squares"; //counter
+                Square square = new Square(this, rnd, paddle, lblScore);          
+              //  lblScore.Text = iCount.ToString() + " Squares"; //counter
             }
 
             if (e.KeyData == Keys.N)
             {
-                iCount = iCount++;
+              //  iCount = iCount++;
                 
             }
             else if (e.KeyData == Keys.Left || e.KeyData == Keys.Right)
