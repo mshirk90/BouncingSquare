@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace BouncingSquare
 {
-    public class Square : IDisposable
+    public class Square : Event, IDisposable
     {
         #region Private Members
         //declare variables
@@ -20,13 +20,19 @@ namespace BouncingSquare
         private int _yDir = 0;
         private Random _rnd = null;
         private Paddle _paddle = null;
-        private Label _lblScore = null;
+      
         private int _value = 0;
         
         #endregion
 
         #region Public Properties
-        
+        public Guid Id
+        {
+            get
+            {
+                return _id;
+            }
+        }
         public PictureBox Box
         {
             get { return _box; }
@@ -45,6 +51,20 @@ namespace BouncingSquare
         {
             get { return _paddle; }
         }
+        public Random rnd
+        {
+            get
+            {
+                return _rnd;
+            }
+        }
+        public Form frm
+        {
+            get
+            {
+                return _form;
+            }
+        }
         #endregion
 
         #region Public Methods
@@ -62,9 +82,9 @@ namespace BouncingSquare
             if (location.Y > _form.Height - _box.Height)
             {
                 Dispose();
-                int score = Convert.ToInt32(_lblScore.Text);
-                score -= _value;
-                _lblScore.Text = score.ToString();
+                ScoreEventArgs e = new ScoreEventArgs(string.Empty, -this._value);
+                RaiseEvent(this, e);
+                
             }
 
             else if (location.Y <= 0)
@@ -84,10 +104,16 @@ namespace BouncingSquare
             else if (_paddle.Box.Bounds.IntersectsWith(_box.Bounds))
             {
                 _yDir = -_yDir;
-                //change the score
-                int score = Convert.ToInt32(_lblScore.Text);
-                score += _value;
-                _lblScore.Text = score.ToString();
+           
+                //change the score              
+                
+                    ScoreEventArgs e = new ScoreEventArgs(String.Empty, _value);
+                    RaiseEvent(this, e);
+                {
+                    Square square = new Square(_form, _rnd, _paddle, _id);
+                }
+                
+                
             }
           
         }
@@ -103,20 +129,18 @@ namespace BouncingSquare
 
         #region Construction
 
-        public Square(Form frm, Random rnd, Paddle paddle, Label lbl)
+        public Square(Form frm, Random rnd, Paddle paddle, Guid id)
         {
             // creates a new picture box, and establishes parameters
-
-                                 
-            _lblScore = lbl;
+            _id = id;
             _paddle = paddle;
             _rnd = rnd;
-            _value = _rnd.Next(1, 200000);
+            _value = _rnd.Next(1, 10);
             _form = frm;
             _box = new PictureBox();
             _box.Paint += _box_Paint;
-            _box.Width = _rnd.Next(35, 50);
-            _box.Height = _rnd.Next(35, 50);
+            _box.Width = _rnd.Next(11, 11);
+            _box.Height = _rnd.Next(11, 11);
             _box.BackColor = Color.FromArgb(_rnd.Next(0, 256), _rnd.Next(0, 256), _rnd.Next(0, 256));
             Point location = new Point();
             
@@ -133,18 +157,17 @@ namespace BouncingSquare
 
             do
             {
-                _xDir = _rnd.Next(-1, 3);
+                _xDir = _rnd.Next(-1, 20);
 
             } while (_xDir == 0);
 
             do
             {
-                _yDir = _rnd.Next(-1, 3);
+                _yDir = _rnd.Next(-1, 23);
 
             } while (_yDir == 0);
             _form.Controls.Add(_box);
-        }
-
+        }       
         private void _box_Paint(object sender, PaintEventArgs e)
         {
             using (Font myfont = new Font("Chiller", 20, FontStyle.Bold))
